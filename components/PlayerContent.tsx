@@ -41,15 +41,15 @@ const PlayerContent:React.FC<PlayerContentProps> = ({song, songUrl}) => {
         const nextSong = player.ids[currentIndex+1];
         
         if (!nextSong){
-            return player.setId(player.ids[0], isLooping);
+            return player.setId(player.ids[0]);
         }
         if(isRandom){
             sound.stop();
-            player.setId(nextSong, isLooping);
+            player.setId(nextSong);
         }else{
             sound.stop();
             const randomIndex = Math.floor(Math.random() * player.ids.length);
-            player.setId(player.ids[randomIndex], isLooping);}
+            player.setId(player.ids[randomIndex]);}
         
     };
     const onPlayPrevious = () => {
@@ -61,7 +61,7 @@ const PlayerContent:React.FC<PlayerContentProps> = ({song, songUrl}) => {
         const previousSong = player.ids[currentIndex-1];
         
         if (!previousSong){
-            return player.setId(player.ids[player.ids.length-1], isLooping);
+            return player.setId(player.ids[player.ids.length-1]);
         }
         if(isPlaying){
             sound.stop();
@@ -72,7 +72,7 @@ const PlayerContent:React.FC<PlayerContentProps> = ({song, songUrl}) => {
               sound.play();
               setIsPlaying(true);
             }, 1200); 
-        }else{player.setId(previousSong, isLooping);}
+        }else{player.setId(previousSong);}
         
     };
     const toggleRandom = () => {
@@ -104,7 +104,7 @@ const PlayerContent:React.FC<PlayerContentProps> = ({song, songUrl}) => {
             src: [songUrl],
             volume: volume,
             html5: true,
-            
+    
             onplay: () => setIsPlaying(true),
             onpause: () => setIsPlaying(false),
             onend: () => {
